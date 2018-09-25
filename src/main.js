@@ -28,6 +28,10 @@ scene.add(light);
 
 
 
+
+
+
+
 // API Key for Mapboxgl. Get one here:
 // https://www.mapbox.com/studio/account/tokens/
 
@@ -68,7 +72,23 @@ let controlsAdded = false;
 function addControls() {
   if (controlsAdded === false) {
     myMap.map.addControl(new mapboxgl.NavigationControl());
+
+    // Fly
+    document.getElementById('fly').addEventListener('click', function () {
+      // Fly to a random location by offsetting the point -74.50, 40
+      // by up to 5 degrees.
+      myMap.map.flyTo({
+          center: [
+              centerLong + (Math.random() * 0.01),
+              centerLat  + (Math.random() * 0.01)
+            ]
+      });
+
+      myMap.map.rotateTo(Math.random() * 10);
+    });
   }
+
+    
 
   controlsAdded = true;
 }
@@ -83,7 +103,6 @@ function update() {
 // Animate loop
 const animate = () => {
 
-  
   updateMeshes(meshPromise, myMap, scene);
 
   requestAnimationFrame(animate);
