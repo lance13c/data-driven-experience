@@ -1,4 +1,4 @@
-require("@babel/polyfill");
+const axios = require("axios");
 
 async function getData(uri) {
     let options = {

@@ -10,6 +10,15 @@ _onLoad_: A function that fires when the application is first booting up. This e
 _onInit_: A function that fires when the mapboxgl map has finished loading.
 
 
+# Dev Setup
+
+1) Download yarn: 
+1) Download parcel:
+
+
+# How to Build
+
+
 
 
 
