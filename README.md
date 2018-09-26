@@ -4,6 +4,13 @@
 
 
 
+# Life Cycle
+
+_onLoad_: A function that fires when the application is first booting up. This ends once the mapboxgl map has finished loading.
+_onInit_: A function that fires when the mapboxgl map has finished loading.
+
+
+
 
 
 # Data
