@@ -1,10 +1,15 @@
 // // Scene Configurations
+require("@babel/polyfill");
+
 const WIDTH = window.innerWidth;
 const HEIGHT = window.innerHeight;
 const VIEW_ANGLE = 45;
 const ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
 const FAR = 10000;
+
+const ZOOM_LEVEL_OVERVIEW = 10;
+const ZOOM_LEVEL_CITYVIEW = 13;
 
 // Scene, camera, canvas, renderer
 const scene = new THREE.Scene();
@@ -54,56 +59,71 @@ let mappa;
 let myMap;
 let data;
 let polygons;
+let meshPromise = null;
+
+mappaSetup();
+
+  function mappaSetup() {
+    // Store all Polygons features in an array called polygons.
+    mappa = new Mappa('MapboxGL', key);
+    myMap = mappa.tileMap(mappaOptions);
+
+    myMap.overlay(canvas, startListeningToEvents);
+    myMap.onChange(update);
+  };
 
 
-  // Store all Polygons features in an array called polygons.
-  mappa = new Mappa('MapboxGL', key);
-  myMap = mappa.tileMap(mappaOptions);
+  // This is to trigger when the Mapbox map has finished loading.
+  function initApp() {
 
-  myMap.overlay(canvas);
-  myMap.onChange(update);
-
-  // https://www.mapbox.com/mapbox-gl-js/example/geojson-polygon/
-  // TEST
-  console.log(myMap);
+    myMap.map.zoomTo(ZOOM_LEVEL_CITYVIEW);
+    meshPromise = createMeshes(dataPromise);
+  }
 
 
-let controlsAdded = false;
-function addControls() {
-  if (controlsAdded === false) {
-    myMap.map.addControl(new mapboxgl.NavigationControl());
+  function startListeningToEvents () {
+    myMap.map.on("load", function() {
 
-    // Fly
-    document.getElementById('fly').addEventListener('click', function () {
-      // Fly to a random location by offsetting the point -74.50, 40
-      // by up to 5 degrees.
-      myMap.map.flyTo({
-          center: [
-              centerLong + (Math.random() * 0.01),
-              centerLat  + (Math.random() * 0.01)
-            ]
+      myMap.map.addControl(new mapboxgl.NavigationControl());
+    
+      // Fly
+      document.getElementById('fly').addEventListener('click', function () {
+        // Fly to a random location by offsetting the point -74.50, 40
+        // by up to 5 degrees.
+        myMap.map.flyTo({
+            center: [
+                centerLong + (Math.random() * 0.01),
+                centerLat  + (Math.random() * 0.01)
+              ]
+        });
+
+        //myMap.map.rotateTo(Math.random() * 10);
       });
 
-      myMap.map.rotateTo(Math.random() * 10);
+      initApp();
+    
+    });
+  
+    myMap.map.on("move", function() {
+      console.log("Map is moving");
     });
   }
 
-    
-
-  controlsAdded = true;
-}
+  // https://www.mapbox.com/mapbox-gl-js/example/geojson-polygon/
+  // TEST
 
 
-let meshPromise = createMeshes(dataPromise);
-function update() {
-  addControls();
-}
+
+function update() {}
 
 
 // Animate loop
 const animate = () => {
 
-  updateMeshes(meshPromise, myMap, scene);
+  if (meshPromise !== null) {
+    updateMeshes(meshPromise, myMap, scene);
+  }
+  
 
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
@@ -164,12 +184,4 @@ function updateMeshes(meshPromise, mappaMap, scene) {
     }
   });
 }
-
-//updateMeshes(meshPromise, myMap, scene);
-
-// meshPromise.then((meshes) => {
-//   console.log("meshes");
-//   console.log(meshes);
-// });
-
 
