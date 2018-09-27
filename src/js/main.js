@@ -1,6 +1,11 @@
 // // Scene Configurations
 require("@babel/polyfill");
 
+require("@fortawesome/fontawesome-free/js/fontawesome");
+const { library, icon, core } = require('@fortawesome/fontawesome-svg-core');
+const { faStroopwafel, icons } = require('@fortawesome/free-solid-svg-icons');
+
+library.add(faStroopwafel);
 
 
 const {createMappa, setupMappa, update, map} = require("./map").default;

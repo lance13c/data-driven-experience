@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.0.0",
+    "@fortawesome/fontawesome-free": "^5.3.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
     "axios": "^0.18.0"
   }
 }
