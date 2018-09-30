@@ -706,11 +706,23 @@ ms@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
+multirange@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/multirange/-/multirange-1.0.0.tgz#3aca7dbefcefa3a4ea7241239a98ab6597726916"
+
 node-releases@^1.0.0-alpha.11:
   version "1.0.0-alpha.12"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.0-alpha.12.tgz#32e461b879ea76ac674e511d9832cf29da345268"
   dependencies:
     semver "^5.3.0"
+
+nouislider@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-12.0.0.tgz#dd0dcee2de5865e242712c4d59bc31fc58e58ee3"
+
+omni-slider@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/omni-slider/-/omni-slider-1.2.1.tgz#0d7f1aa00cbf8da7214f0640024a2012167af919"
 
 path-parse@^1.0.5:
   version "1.0.6"
@@ -815,3 +827,7 @@ unicode-match-property-value-ecmascript@^1.0.2:
 unicode-property-aliases-ecmascript@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.0.4.tgz#5a533f31b4317ea76f17d807fa0d116546111dd0"
+
+wnumb@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/wnumb/-/wnumb-1.1.0.tgz#fcecb88050869bdf384dacbfd612325980c93ddc"

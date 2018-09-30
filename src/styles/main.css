@@ -30,14 +30,21 @@ body {
 }
 
 
+.controls {
+    position: absolute;
+    width: 100%;
+    bottom: 0%;
+    z-index: 10;
+}
+
+
 /* Buttons */
 .btn-container {
+    position: relative;
+    justify-content: flex-end;
     display: flex;
     flex-direction: row;
-    position: absolute;
-    right: 10%;
-    bottom: 10%;
-    z-index: 10;
+    right: 0%;
 }
 
 .btn__float {
@@ -45,7 +52,7 @@ body {
     justify-items: center;
     align-items: center;
     position: relative;
-    margin: 0 20px;
+    margin: 0 40px 0 0;
     border-radius: 100%;
     width: 55px;
     height: 55px;
@@ -64,24 +71,84 @@ body {
     background: transparent;
     border-radius: 100%;
   }
-  .ripple:hover:after {
-    content: "";
-    display: inline-block;
-    border-radius: 100%;
-    opacity: 0;
-    transform: scale(1.6, 1.6);
-    transition: opacity 0.8s, background 0.8s, transform 0.25s;
-    background: var(--color-wave);
-    background-clip: content-box;
-  }
+
+.ripple:hover:after {
+content: "";
+display: inline-block;
+border-radius: 100%;
+opacity: 0;
+transform: scale(1.6, 1.6);
+transition: opacity 0.8s, background 0.8s, transform 0.25s;
+background: var(--color-wave);
+background-clip: content-box;
+}
+
+.ripple:active:after {
+content: "";
+display: inline-block;
+border-radius: 100%;
+opacity: 1;
+background: var(--color-wave);
+transform: scale(0, 0);
+transition: background 0.1s;
+}
 
 
-  .ripple:active:after {
-    content: "";
-    display: inline-block;
-    border-radius: 100%;
-    opacity: 1;
-    background: var(--color-wave);
-    transform: scale(0, 0);
-    transition: background 0.1s;
-  }
+
+@keyframes open-filter--a {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes close-filter--a {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Filters */
+#filter-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    overflow: hidden;
+}
+
+#filter-container .close-filter {
+    animation: close-filter--a .3s;
+    animation-fill-mode: forwards;
+}
+
+.filter {
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgba(6, 5, 39, 0.815);
+
+    animation: open-filter--a 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.filter > div {
+    width: 80%;
+}
+
+#filter-container .slider {
+    width: 80%;
+}
+
+
+.filter-title {
+
+}

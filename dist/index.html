@@ -5,16 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Seattle Build Permits</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/nouislider.fdadbac8.css" rel="stylesheet">
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css" rel="stylesheet">
     <link href="/main.d96059c3.css" rel="stylesheet">
-<script src="/main.d96059c3.js"></script></head>
+<script src="/nouislider.fdadbac8.js"></script><script src="/main.d96059c3.js"></script></head>
 <body>
 
     <button id="fly">Fly</button>
-    <div class="btn-container">
-        <a class="btn__float ripple filter__cost"><i class="fas fa-stroopwafel"></i></a>
-        <a class="btn__float ripple filter__time"></a>
+
+    <div class="controls">
+        <div class="btn-container">
+            <a class="btn__float ripple filter-btn__cost"><i class="fas fa-stroopwafel"></i></a>
+            <a class="btn__float ripple filter-btn__time"></a>
+        </div>
+        <div id="filter-container">
+            <div class="filter-container__title">Filters</div>
+        </div>
     </div>
+    
+
     <canvas id="canvas" style="position: absolute"></canvas>
     
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js"></script>

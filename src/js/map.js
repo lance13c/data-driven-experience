@@ -22,15 +22,17 @@ function setupMappa(startListeningToEvents) {
   // Store all Polygons features in an array called polygons.
 
   mappaMap.overlay(canvas, startListeningToEvents);
-  mappaMap.onChange(update);
+  // mappaMap.onChange(uspdate);
 
   return mappaMap;
 };
 
 
-function update(callback) {
-  callback();
-}
+// function update(callback) {
+//   if (callback) {
+//     callback();
+//   }
+// }
 
 
 
@@ -38,4 +40,4 @@ function update(callback) {
 
 
 
-export default {createMappa, setupMappa, update}
+export default {createMappa, setupMappa}

@@ -8,9 +8,10 @@ const { faStroopwafel, icons } = require('@fortawesome/free-solid-svg-icons');
 library.add(faStroopwafel);
 
 
-const {createMappa, setupMappa, update, map} = require("./map").default;
+const {createMappa, setupMappa, map} = require("./map").default;
 const {initWorld, animate, createMeshes, updateMeshes, world} = require("./world").default;
 const {getData, data} = require("./data").default;
+const {toggleFilter, randVal} = require("./filters").default;
 
 //const getData = data.getData;
 
@@ -30,6 +31,19 @@ let dataPromise = getData(uri);
 const scene = initWorld(canvas);
 const mappaMap = createMappa();
 setupMappa(startListeningToEvents);
+
+// Event Listeners
+let filterBtnCost = document.getElementsByClassName("filter-btn__cost")[0];
+let filterBtnTime = document.getElementsByClassName("filter-btn__time")[0];
+
+
+filterBtnCost.addEventListener("click", () => {
+  toggleFilter("cost", 0, 100);
+});
+
+filterBtnTime.addEventListener("click", () => {
+  toggleFilter("time", 0, 100);
+});
 
 
 // Animation Loop
@@ -54,6 +68,42 @@ function startListeningToEvents () {
   mappaMap.map.on("load", function() {
 
     mappaMap.map.addControl(new mapboxgl.NavigationControl());
+
+    var layers = mappaMap.map.getStyle().layers;
+
+    var labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+            labelLayerId = layers[i].id;
+            break;
+        }
+    }
+
+    mappaMap.map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 14,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': .6
+        }
+    }, labelLayerId);
   
     // Fly
     document.getElementById('fly').addEventListener('click', function () {
