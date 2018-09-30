@@ -3,6 +3,8 @@ html {
     --color-wave: radial-gradient(transparent 1%, 
         rgba(255, 255, 255, 0.336) 50%, transparent 1%);
 
+    --default-font: "Roboto";
+
     /* radial-gradient(red, green, blue); */
 }
 
@@ -32,6 +34,8 @@ body {
 
 .controls {
     position: absolute;
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     bottom: 0%;
     z-index: 10;
@@ -42,6 +46,8 @@ body {
 .btn-container {
     position: relative;
     justify-content: flex-end;
+    padding: 20px 0;
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
     right: 0%;
@@ -73,24 +79,24 @@ body {
   }
 
 .ripple:hover:after {
-content: "";
-display: inline-block;
-border-radius: 100%;
-opacity: 0;
-transform: scale(1.6, 1.6);
-transition: opacity 0.8s, background 0.8s, transform 0.25s;
-background: var(--color-wave);
-background-clip: content-box;
+    content: "";
+    display: inline-block;
+    border-radius: 100%;
+    opacity: 0;
+    transform: scale(1.6, 1.6);
+    transition: opacity 0.8s, background 0.8s, transform 0.25s;
+    background: var(--color-wave);
+    background-clip: content-box;
 }
 
 .ripple:active:after {
-content: "";
-display: inline-block;
-border-radius: 100%;
-opacity: 1;
-background: var(--color-wave);
-transform: scale(0, 0);
-transition: background 0.1s;
+    content: "";
+    display: inline-block;
+    border-radius: 100%;
+    opacity: 1;
+    background: var(--color-wave);
+    transform: scale(0, 0);
+    transition: background 0.1s;
 }
 
 
@@ -119,8 +125,25 @@ transition: background 0.1s;
 #filter-container {
     position: relative;
     z-index: 3;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
     width: 100%;
     overflow: hidden;
+    background: rgba(6, 5, 39, 0.815);
+
+}
+
+.filter-container__title {
+    position: relative;
+    display: inline;
+    align-self: center;
+    font-size: 25px;
+    padding-left: 20px;
+    color: #fefefe;
+    font-family: var(--default-font);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 #filter-container .close-filter {
@@ -128,27 +151,34 @@ transition: background 0.1s;
     animation-fill-mode: forwards;
 }
 
+#filter-container .filter:not(:last-child) {
+    border-bottom: rgba(21, 111, 255, 0.7) solid 1px;
+}
+
 .filter {
     height: 120px;
+    width: 100%;
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    background: rgba(6, 5, 39, 0.815);
-
     animation: open-filter--a 0.3s;
     animation-fill-mode: forwards;
 }
 
-.filter > div {
-    width: 80%;
+.filter__title {
+    display: inline-block;
+    color: #fefefe;
+    font-size: 25px;
+    font-family: var(--default-font);
+}
+
+.filter__input {
+    display: inline-block;
+    width: 75%;
 }
 
 #filter-container .slider {
     width: 80%;
-}
-
-
-.filter-title {
-
 }

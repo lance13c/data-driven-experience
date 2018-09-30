@@ -17,12 +17,12 @@ function getFilterHTML(type) {
     case "cost":
       return `<div class="filter__cost filter">
         <div class="filter__title">Cost</div>
-        <div class="filter__cost__input" type="range"></div>
+        <div class="filter__cost__input filter__input" type="range"></div>
       </div>`;
     case "time":
       return `<div class="filter__time filter">
         <div class="filter__title">Time</div>
-        <div class="filter__time__input" type="range"></div>
+        <div class="filter__time__input filter__input" type="range"></div>
       </div>`
   }
 }
