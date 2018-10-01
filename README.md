@@ -2,6 +2,10 @@
 
 ## [Demo](http://socrata.ciciliostudio.com/)
 
+### Disclaimer
+
+There are two contributers listed. I have been using my girlfriend's old laptop (because mine broke) and I have been submitting under the wrong author.
+
 # Data Driven Experience
 
 This uses the data about _building permits_ provided by Socrata. The experience allows the user to filter out permits by time and cost. 
