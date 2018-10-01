@@ -11,7 +11,7 @@ library.add(faMoneyBillAlt);
 
 
 const {createMappa, setupMappa, map} = require("./map").default;
-const {initWorld, animate, createLineMeshes, createSphereMeshes, updateMeshes, world} = require("./world").default;
+const {initWorld, animate, createLineMeshes, createSphereMeshes, updateMeshes, removeMeshes, world} = require("./world").default;
 const {getData, data} = require("./data").default;
 const {toggleFilterUI, getActiveFilters} = require("./filters").default;
 const {initExplore, rand} = require("./explore").default;
@@ -65,7 +65,7 @@ function onInit() {
   endLoading();
   lineMeshPromise = createLineMeshes(dataPromise);
   sphereMeshPromise = createSphereMeshes(dataPromise);
-  meshPromise = sphereMeshPromise;
+  meshPromise = lineMeshPromise;
   initExplore(mappaMap);
 
   setTimeout(() => {
@@ -116,6 +116,18 @@ function startListeningToEvents () {
             'fill-extrusion-opacity': .6
         }
     }, labelLayerId);
+
+    mappaMap.map.on("zoomend", () => {
+      let zoom = mappaMap.map.getZoom();
+
+      if (zoom < 15) {
+        meshPromise = lineMeshPromise;
+        removeMeshes(sphereMeshPromise);
+      } else {
+        meshPromise = sphereMeshPromise;
+        removeMeshes(lineMeshPromise);
+      }
+    });
   
     onInit();
   });

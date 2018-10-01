@@ -45,6 +45,14 @@ function getActiveMeshes() {
   return activeMeshes;
 }
 
+function removeMeshes(meshPromise) {
+  meshPromise.then((meshes) => {
+    for (let mesh of meshes) {
+      scene.remove(mesh);
+    }
+  });
+}
+
 
 function updateMeshes(meshPromise, mappaMap, scene) {
   activeMeshes = [];
@@ -157,4 +165,4 @@ const animate = (callback) => {
 };
 
 
-export default {initWorld, animate, createLineMeshes, createSphereMeshes, updateMeshes, getActiveMeshes}
+export default {initWorld, animate, createLineMeshes, createSphereMeshes, updateMeshes,removeMeshes, getActiveMeshes}
