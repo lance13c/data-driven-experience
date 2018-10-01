@@ -11,7 +11,7 @@ library.add(faStroopwafel);
 const {createMappa, setupMappa, map} = require("./map").default;
 const {initWorld, animate, createMeshes, updateMeshes, world} = require("./world").default;
 const {getData, data} = require("./data").default;
-const {toggleFilter, randVal} = require("./filters").default;
+const {toggleFilterUI, getActiveFilters, randVal, getCostMin, getCostMax} = require("./filters").default;
 
 //const getData = data.getData;
 
@@ -35,15 +35,23 @@ setupMappa(startListeningToEvents);
 // Event Listeners
 let filterBtnCost = document.getElementsByClassName("filter-btn__cost")[0];
 let filterBtnTime = document.getElementsByClassName("filter-btn__time")[0];
+let filterBtnTest = document.getElementsByClassName("filter-btn__test")[0];
 
 
 filterBtnCost.addEventListener("click", () => {
-  toggleFilter("cost", 0, 100);
+  toggleFilterUI("cost", 0, 1000000);
 });
 
 filterBtnTime.addEventListener("click", () => {
-  toggleFilter("time", 0, 100);
+  toggleFilterUI("time", 0, 100);
 });
+
+filterBtnTest.addEventListener("click", () => {
+  let filters = getActiveFilters();
+  return filters;
+});
+
+
 
 
 // Animation Loop

@@ -7,6 +7,16 @@ let activeFilters = {
   time: false
 }
 
+let costMin = 0;
+let costMax = 0;
+
+let filterSliders = new Map();
+let filters = new Map();
+
+filters.set("cost", costFilter);
+//filters.set("time", )
+
+
 /**
  * Generates the cost filter's HTML
  * @param {Number} minCost 
@@ -43,6 +53,7 @@ function _removeFilter(type, element) {
     element.classList.add("close-filter");
 
     setTimeout(() => {
+      filterSliders.delete(type);
       element.parentElement.removeChild(element);
       activeFilters[type] = false;
     }, REMOVAL_DELAY); 
@@ -51,8 +62,65 @@ function _removeFilter(type, element) {
   }
 }
 
+/**
+ * 
+ * @param {Object} data - Object of any information  
+ */
+function costFilter(data) {
+  let slider = filterSliders.get("cost");
+  if (data.estprojectcost !== undefined && slider !== undefined) {
+    let valArr = slider.get();
+    let min = parseInt(valArr[0].replace(/(\$|,)/g, ""));
+    let max = parseInt(valArr[1].replace(/(\$|,)/g, ""));
+    let dataCost = parseInt(data.estprojectcost);
 
-function toggleFilter(type, min, max) {
+    if (dataCost > min && dataCost < max) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * This should be run when all data is initalized.
+ * @param {*} data 
+ */
+function setCostMaxMin(data) {
+  if (data.estprojectcost !== undefined) {
+    let cost = parseInt((data.estprojectcost).replace(/(\$|,)/g, ""));
+
+    if (costMin > cost) {costMin = cost;}
+    if (costMax < cost) {costMax = cost;}
+  }
+}
+
+function getCostMin() {
+  return costMin;
+}
+
+function getCostMax() {
+  return costMax;
+}
+
+
+
+
+function getActiveFilters() {
+  let resultFilters = [];
+  for (let [type] of filterSliders) {
+    let filter = filters.get(type);
+
+    if (filter !== undefined) {
+      resultFilters.push(filter);
+    }
+  }
+
+  return resultFilters;
+}
+
+
+function toggleFilterUI(type, min, max) {
   let filterContainer = document.getElementById("filter-container");
   let filterEl;
 
@@ -83,8 +151,8 @@ function toggleFilter(type, min, max) {
     switch(type) {
       case "cost": {
         options.format = wNumb({
-          decimals: 1,
-          thousand: '.',
+          decimals: 0,
+          thousand: ',',
           prefix: '$'
         }),
     
@@ -97,8 +165,8 @@ function toggleFilter(type, min, max) {
       break;
       case "time": {
         options.format = wNumb({
-          decimals: 1,
-          thousand: '.'
+          decimals: 0,
+          thousand: ','
         }),
     
         options.pips = {
@@ -109,10 +177,11 @@ function toggleFilter(type, min, max) {
       }
     }
 
-    noUiSlider.create(filterEl, options);
+    let filterSlider = noUiSlider.create(filterEl, options);
+    filterSliders.set(type, filterSlider);
     activeFilters[type] = true;
     return true;
   }
 }
 
-export default {toggleFilter}
+export default {toggleFilterUI, getActiveFilters, setCostMaxMin, getCostMin, getCostMax}
