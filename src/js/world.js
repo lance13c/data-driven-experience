@@ -139,7 +139,7 @@ async function createSphereMeshes(dataPromise) {
   await dataPromise.then((response) => {
     for (let i = 0; i < response.data.length; i++) {// (let entry of response.data) {
       const radius = 1;
-      const geometry = new THREE.SphereGeometry(radius, radius, 20, 20);
+      const geometry = new THREE.SphereGeometry(radius, 20, 20);
       const material = new THREE.MeshBasicMaterial({ color: 0xff0000, side: 2});
       const mesh = new THREE.Mesh(geometry, material);
       mesh.appData = response.data[i];

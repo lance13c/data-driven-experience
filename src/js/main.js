@@ -3,11 +3,12 @@ require("@babel/polyfill");
 
 require("@fortawesome/fontawesome-free/js/fontawesome");
 const { library, icon, core } = require('@fortawesome/fontawesome-svg-core');
-const { faClock, faMoneyBillAlt, faInfo, icons } = require('@fortawesome/free-solid-svg-icons');
+const { faClock, faInfo, icons } = require('@fortawesome/free-solid-svg-icons');
+const faDollarSign = require('@fortawesome/free-solid-svg-icons').faDollarSign;
 
 library.add(faClock);
 library.add(faInfo);
-library.add(faMoneyBillAlt);
+library.add(faDollarSign);
 
 
 const {createMappa, setupMappa, map} = require("./map").default;

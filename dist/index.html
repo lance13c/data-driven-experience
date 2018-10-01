@@ -8,6 +8,8 @@
     <link href="/nouislider.fdadbac8.css" rel="stylesheet">
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <script defer="" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+
     <link href="/main.d96059c3.css" rel="stylesheet">
 <script src="/nouislider.fdadbac8.js"></script><script src="/main.d96059c3.js"></script></head>
 <body>
@@ -15,8 +17,8 @@
     <div id="loading-screen">
         <div class="container">
             <h1 class="title">
-                <span class="w-1">Loading<span>
-                <span class="w-2">Latest<span>
+                <span class="w-1">Let's<span>
+                <span class="w-2">Explore<span>
                 <span class="w-3">Seattle<span>
                 <span class="w-4">Building<span>
                 <span class="w-5">Developments<span>
@@ -30,26 +32,11 @@
 
     <button id="explore">Explore</button>
 
-    <!--
-        Most Recent Activity
-        Title -- 
-        Loading Screen -- Done
-        Explore Button --- Done
-        UI with info about building permit -- Done
-        Move Filter Title Location -- Done
-        README -- 
-        
-        Color coding values (least to most)
-        Height change?
-        Make lines into circles when zoomed into building view -- Done
-
-     -->
-
     <div class="controls">
         
         <div class="btn-container">
             <div class="filter-container__title">Filters</div>
-            <a class="btn__float ripple filter-btn__cost color-blue"><i class="fas fa-money-bill-alt"></i></a>
+            <a class="btn__float ripple filter-btn__cost color-blue"><span>$</span></a>
             <a class="btn__float ripple filter-btn__time color-purple"><i class="fas fa-clock"></i></a>
         </div>
         <div id="filter-container"></div>
@@ -61,6 +48,7 @@
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/96/three.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mappa-mundi/dist/mappa.min.js" type="text/javascript"></script>
+
 
     <script src="/main.c48f6146.js"></script>
 
