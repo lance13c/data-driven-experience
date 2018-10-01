@@ -178,26 +178,14 @@ function toggleFilterUI(type, min, max) {
           decimals: 0,
           thousand: ',',
           prefix: '$'
-        }),
-    
-        options.pips = {
-            mode: 'steps',
-            stepped: true,
-            density: 1
-        }
+        })
       }
       break;
       case "time": {
         options.format = wNumb({
           decimals: 0,
           thousand: ''
-        }),
-    
-        options.pips = {
-            mode: 'steps',
-            stepped: true,
-            density: 1
-        }
+        })
       }
     }
 

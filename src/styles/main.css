@@ -225,9 +225,9 @@ body {
     position: absolute;
     margin: 60px 15% 0 15%;
     width: 70%;
-    max-height: 60%;
+    max-height: 80%;
     top: 0;
-    background: #f8f8ff;
+    background: #f8f8ffee;
     padding: 10px;
     border-radius: 10px;
     font-family: var(--default-font);
@@ -393,7 +393,7 @@ body {
 
 #loading-screen .w-4 {
     animation-delay: 0.9s;
-    color: darkblue;
+    color: rgb(14, 144, 153);
 }
 
 #loading-screen .w-5 {
@@ -456,6 +456,14 @@ body {
   }
 
 
+@media screen and (max-width: 700px) {
+    #loading-screen .title span{
+        font-size: 45px;
+    }
 
+    .filter__input {
+        width: 55%;
+    }
+}
 
 
