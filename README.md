@@ -31,7 +31,7 @@ Try it out, see what you think.
 # Dev Setup
 
 1) Clone or Download the repo.
-1) Download yarn: [Yarn](https://yarnpkg.com/en/);
+1) Download yarn: [Yarn](https://yarnpkg.com/en/)
 1) Download parcel: [Parcel](https://parceljs.org/)
 1) Run `yarn install` in a terminal.
 1) Run `parcel index.html` in a terminal.
