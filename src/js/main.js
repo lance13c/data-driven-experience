@@ -3,18 +3,19 @@ require("@babel/polyfill");
 
 require("@fortawesome/fontawesome-free/js/fontawesome");
 const { library, icon, core } = require('@fortawesome/fontawesome-svg-core');
-const { faClock, faDollarSign, faInfo, icons } = require('@fortawesome/free-solid-svg-icons');
+const { faClock, faMoneyBillAlt, faInfo, icons } = require('@fortawesome/free-solid-svg-icons');
 
 library.add(faClock);
-library.add(faDollarSign);
 library.add(faInfo);
+library.add(faMoneyBillAlt);
 
 
 const {createMappa, setupMappa, map} = require("./map").default;
-const {initWorld, animate, createMeshes, updateMeshes, world} = require("./world").default;
+const {initWorld, animate, createLineMeshes, createSphereMeshes, updateMeshes, world} = require("./world").default;
 const {getData, data} = require("./data").default;
 const {toggleFilterUI, getActiveFilters} = require("./filters").default;
 const {initExplore, rand} = require("./explore").default;
+const {endLoading, rand2} = require("./loading").default;
 
 //const getData = data.getData;
 
@@ -22,6 +23,8 @@ const {initExplore, rand} = require("./explore").default;
 const canvas = document.getElementById("canvas");
 const ZOOM_LEVEL_OVERVIEW = 10;
 const ZOOM_LEVEL_CITYVIEW = 13;
+let lineMeshPromise = null;
+let sphereMeshPromise = null;
 let meshPromise = null;
 const centerLat = 47.5964863;
 const centerLong = -122.3303769;
@@ -38,8 +41,6 @@ setupMappa(startListeningToEvents);
 // Event Listeners
 let filterBtnCost = document.getElementsByClassName("filter-btn__cost")[0];
 let filterBtnTime = document.getElementsByClassName("filter-btn__time")[0];
-let filterBtnTest = document.getElementsByClassName("filter-btn__test")[0];
-
 
 filterBtnCost.addEventListener("click", () => {
   toggleFilterUI("cost", 0, 1000000);
@@ -61,9 +62,15 @@ animate(() => {
 
 // This is to trigger when the Mapbox map has finished loading.
 function onInit() {
-  mappaMap.map.zoomTo(ZOOM_LEVEL_CITYVIEW);
-  meshPromise = createMeshes(dataPromise);
+  endLoading();
+  lineMeshPromise = createLineMeshes(dataPromise);
+  sphereMeshPromise = createSphereMeshes(dataPromise);
+  meshPromise = sphereMeshPromise;
   initExplore(mappaMap);
+
+  setTimeout(() => {
+    mappaMap.map.zoomTo(ZOOM_LEVEL_CITYVIEW);
+  }, 3000);
 }
 
 /**

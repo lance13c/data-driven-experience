@@ -2,6 +2,7 @@ import data from "./data";
 
 const {getActiveMeshes, test} = require("./world").default;
 
+let preMesh = null;
 
 /**
  * This acts as a wrapper to any data value.
@@ -28,7 +29,7 @@ function addOverlay(permitData) {
   overlay.innerHTML = `
 
       <div class="info__top-bar">
-        <a class="info__link" href="${getValue(permitData.link)}"><i class="fas fa-info"></i></a>
+        <a class="info__link" target="_blank" href="${getValue(permitData.link)}"><i class="fas fa-info"></i></a>
         <span class="info__dates">${getValue(permitData.issueddate)} - ${getValue(permitData.expiresdate)}</span>
         <span class="info__status">${getValue(permitData.statuscurrent)}</span>
       </div>
@@ -53,10 +54,19 @@ function addOverlay(permitData) {
   document.body.appendChild(overlay);
 }
 
+/**
+ * Removes the overlay and the mesh highlight color
+ */
 function removeOverlay() {
   let overlayEl = document.getElementById("info-overlay");
   if (overlayEl !== null) {
     overlayEl.parentElement.removeChild(overlayEl);
+  }
+
+  if (preMesh !== null) {
+    preMesh.geometry.scale(0.33, 0.33, 0.33);
+    preMesh.material.setValues({color: 0xff0000});
+    preMesh = null;
   }
 }
 
@@ -88,6 +98,9 @@ function initExplore(mappaMap) {
           });
 
           addOverlay(mesh.appData);
+          mesh.geometry.scale(3.0, 3.0, 3.0);
+          mesh.material.setValues({color: 0x00ff00});
+          preMesh = mesh;
         }
       });
 

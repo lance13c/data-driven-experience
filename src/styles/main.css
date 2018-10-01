@@ -63,7 +63,7 @@ body {
 
 .btn__float {
     display: flex;
-    justify-items: center;
+    justify-content: center;
     align-items: center;
     position: relative;
     margin: 0 40px 0 0;
@@ -72,6 +72,18 @@ body {
     height: 55px;
     box-shadow: 0px 2px 8px 1px black;
 }
+
+.btn-container .btn__float span {
+    width: 100%;
+    font-size: 38px;
+}
+
+.btn-container .btn__float svg {
+    width: 100%;
+    font-size: 38px;
+}
+
+
 
 .ripple:after {
     content: "";
@@ -142,8 +154,11 @@ body {
 }
 
 .filter-container__title {
-    position: relative;
-    display: inline;
+    position: absolute;
+    top: -25%;
+    right: 40px;
+    width: 100%;
+    display: block;
     align-self: center;
     font-size: 25px;
     padding-left: 20px;
@@ -151,6 +166,7 @@ body {
     font-family: var(--default-font);
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-align: right;
 }
 
 #filter-container .close-filter {
@@ -200,7 +216,7 @@ body {
     width: 70%;
     max-height: 60%;
     top: 0;
-    background: #fefefe;
+    background: #f8f8ff;
     padding: 10px;
     border-radius: 10px;
     font-family: var(--default-font);
@@ -219,7 +235,7 @@ body {
     position: relative;
     top: -10px;
     left: -10px;
-    border-top-left-radius: 10%;
+    border-top-left-radius: 10px;
     display: inline-block;
     margin-right: 25%;
     width: 50px;
@@ -282,10 +298,151 @@ body {
 }
 
 
+/* Loading */
+
+@keyframes load-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes text-fade-in {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+
+#loading-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-image: radial-gradient(circle,rgb(21, 116, 145) 20%, #101010);
+    transition: backgroud, opacity; 
+}
+
+#loading-screen .container {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#loading-screen .title {
+    width: 100%;
+    font-family: var(--default-font);
+    font-size: 50px;
+    font-weight: 700;
+    color: #fefefe;
+}
+
+
+#loading-screen span {
+    display: block;
+    font-family: var(--default-font);
+    opacity: 0;
+    text-align: left;
+    font-size: 50px;
+    font-weight: 700;
+    color: #fefefe;
+    transform: rotateX(-90deg);
+    transition: opacity, transform;
+    transform-origin: top;
+    animation: text-fade-in 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+#loading-screen .w-1 {
+    animation-delay: 0s;
+}
+
+#loading-screen .w-2 {
+    animation-delay: 0.3s;
+    color: orange;
+}
+
+#loading-screen .w-3 {
+    animation-delay: 0.6s;
+    color: rgb(148, 8, 148);
+}
+
+#loading-screen .w-4 {
+    animation-delay: 0.9s;
+    color: darkblue;
+}
+
+#loading-screen .w-5 {
+    animation-delay: 1.2s;
+    color: rgb(15, 15, 15);
+}
 
 
 
 
+/* Spinner from spinkit - http://tobiasahlin.com/spinkit/ */
+.spinner {
+    margin: 100px auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
+  }
+  
+  .cube1, .cube2 {
+    background-color: #fefefe;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
+    animation: sk-cubemove 1.8s infinite ease-in-out;
+  }
+  
+  .cube2 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+  }
+  
+  @-webkit-keyframes sk-cubemove {
+    25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
+    50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
+    75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+    100% { -webkit-transform: rotate(-360deg) }
+  }
+  
+  @keyframes sk-cubemove {
+    25% { 
+      transform: translateX(42px) rotate(-90deg) scale(0.5);
+      -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);
+    } 50% { 
+      transform: translateX(42px) translateY(42px) rotate(-179deg);
+      -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
+    } 50.1% { 
+      transform: translateX(42px) translateY(42px) rotate(-180deg);
+      -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
+    } 75% { 
+      transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+      -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);
+    } 100% { 
+      transform: rotate(-360deg);
+      -webkit-transform: rotate(-360deg);
+    }
+  }
 
 
 

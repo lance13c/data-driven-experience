@@ -94,7 +94,7 @@ function checkFilters(filterArray, data) {
  * @param {*} dataPromise 
  * @param {Array} filterArray - An array of filter functions that return true if the data provided is valid within the filter.
  */
-async function createMeshes(dataPromise) {
+async function createLineMeshes(dataPromise) {
 
   let meshes = [];
 
@@ -103,6 +103,35 @@ async function createMeshes(dataPromise) {
       const radius = 0.2;
       const height = 10;
       const geometry = new THREE.CylinderGeometry(radius, radius, height, 32);
+      const material = new THREE.MeshBasicMaterial({ color: 0xff0000, side: 2});
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.appData = response.data[i];
+      
+      // Set Filter Mins and Maxes
+      setCostMaxMin(response.data[i]);
+      
+      meshes.push(mesh);
+    }
+  });
+
+
+  return meshes;
+}
+
+
+/**
+ * 
+ * @param {*} dataPromise 
+ * @param {Array} filterArray - An array of filter functions that return true if the data provided is valid within the filter.
+ */
+async function createSphereMeshes(dataPromise) {
+
+  let meshes = [];
+
+  await dataPromise.then((response) => {
+    for (let i = 0; i < response.data.length; i++) {// (let entry of response.data) {
+      const radius = 1;
+      const geometry = new THREE.SphereGeometry(radius, radius, 20, 20);
       const material = new THREE.MeshBasicMaterial({ color: 0xff0000, side: 2});
       const mesh = new THREE.Mesh(geometry, material);
       mesh.appData = response.data[i];
@@ -128,4 +157,4 @@ const animate = (callback) => {
 };
 
 
-export default {initWorld, animate, createMeshes, updateMeshes, getActiveMeshes}
+export default {initWorld, animate, createLineMeshes, createSphereMeshes, updateMeshes, getActiveMeshes}

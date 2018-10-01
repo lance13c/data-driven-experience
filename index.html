@@ -12,26 +12,44 @@
 </head>
 <body>
 
+    <div id="loading-screen">
+        <div class="container">
+            <h1 class="title">
+                <span class="w-1">Loading<span>
+                <span class="w-2">Latest<span>
+                <span class="w-3">Seattle<span>
+                <span class="w-4">Building<span>
+                <span class="w-5">Developments<span>
+            <h1>  
+            <div class="spinner">
+                <div class="cube1"></div>
+                <div class="cube2"></div>
+            </div>
+        </div>
+    </div>
+
     <button id='explore'>Explore</button>
 
     <!--
         Most Recent Activity
-        Title --
-        Loading Screen --
+        Title -- 
+        Loading Screen -- Done
         Explore Button --- Done
-        UI with info about building permit --
-        
+        UI with info about building permit -- Done
+        Move Filter Title Location -- Done
+        README -- 
         
         Color coding values (least to most)
         Height change?
-        Make lines into circles when zoomed into building view
+        Make lines into circles when zoomed into building view -- 
 
      -->
 
     <div class="controls">
-        <div class="filter-container__title">Filters</div>
+        
         <div class="btn-container">
-            <a class="btn__float ripple filter-btn__cost color-blue"><i class="fas fa-dollar-sign"></i></a>
+            <div class="filter-container__title">Filters</div>
+            <a class="btn__float ripple filter-btn__cost color-blue"><i class="fas fa-money-bill-alt"></i></a>
             <a class="btn__float ripple filter-btn__time color-purple"><i class="fas fa-clock"></i></a>
         </div>
         <div id="filter-container"></div>
