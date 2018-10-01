@@ -3,15 +3,17 @@ require("@babel/polyfill");
 
 require("@fortawesome/fontawesome-free/js/fontawesome");
 const { library, icon, core } = require('@fortawesome/fontawesome-svg-core');
-const { faStroopwafel, icons } = require('@fortawesome/free-solid-svg-icons');
+const { faClock, faDollarSign, icons } = require('@fortawesome/free-solid-svg-icons');
 
-library.add(faStroopwafel);
+library.add(faClock);
+library.add(faDollarSign);
 
 
 const {createMappa, setupMappa, map} = require("./map").default;
 const {initWorld, animate, createMeshes, updateMeshes, world} = require("./world").default;
 const {getData, data} = require("./data").default;
-const {toggleFilterUI, getActiveFilters, randVal, getCostMin, getCostMax} = require("./filters").default;
+const {toggleFilterUI, getActiveFilters} = require("./filters").default;
+const {initExplore, rand} = require("./explore").default;
 
 //const getData = data.getData;
 
@@ -43,15 +45,8 @@ filterBtnCost.addEventListener("click", () => {
 });
 
 filterBtnTime.addEventListener("click", () => {
-  toggleFilterUI("time", 0, 100);
+  toggleFilterUI("time", 2000, 2030);
 });
-
-filterBtnTest.addEventListener("click", () => {
-  let filters = getActiveFilters();
-  return filters;
-});
-
-
 
 
 // Animation Loop
@@ -67,6 +62,7 @@ animate(() => {
 function onInit() {
   mappaMap.map.zoomTo(ZOOM_LEVEL_CITYVIEW);
   meshPromise = createMeshes(dataPromise);
+  initExplore(mappaMap);
 }
 
 /**
@@ -113,20 +109,6 @@ function startListeningToEvents () {
         }
     }, labelLayerId);
   
-    // Fly
-    document.getElementById('fly').addEventListener('click', function () {
-      // Fly to a random location by offsetting the point -74.50, 40
-      // by up to 5 degrees.
-      mappaMap.map.flyTo({
-          center: [
-              centerLong + (Math.random() * 0.01),
-              centerLat  + (Math.random() * 0.01)
-            ]
-      });
-
-      //myMap.map.rotateTo(Math.random() * 10);
-    });
-
     onInit();
   });
 

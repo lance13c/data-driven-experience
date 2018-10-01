@@ -8,6 +8,8 @@ const ASPECT = WIDTH / HEIGHT;
 const NEAR = 0.1;
 const FAR = 10000;
 
+let activeMeshes = [];
+
 let renderer,
     camera,
     scene;
@@ -39,8 +41,14 @@ function getNewMaterialColor(hexColor) {
 
 }
 
+function getActiveMeshes() {
+  return activeMeshes;
+}
+
 
 function updateMeshes(meshPromise, mappaMap, scene) {
+  activeMeshes = [];
+
   meshPromise.then((meshes) => {
     for (let mesh of meshes) {
 
@@ -48,6 +56,7 @@ function updateMeshes(meshPromise, mappaMap, scene) {
       
       if (valid) {
         mesh.material.visible = true;
+        activeMeshes.push(mesh);
       } else {
         mesh.material.visible = false;
       }
@@ -119,4 +128,4 @@ const animate = (callback) => {
 };
 
 
-export default {initWorld, animate, createMeshes, updateMeshes}
+export default {initWorld, animate, createMeshes, updateMeshes, getActiveMeshes}

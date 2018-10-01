@@ -1,6 +1,7 @@
 
 import noUiSlider from "nouislider";
 import wNumb from "wnumb";
+import moment from "moment";
 
 let activeFilters = {
   cost: false,
@@ -14,6 +15,7 @@ let filterSliders = new Map();
 let filters = new Map();
 
 filters.set("cost", costFilter);
+filters.set("time", timeFilter);
 //filters.set("time", )
 
 
@@ -83,6 +85,27 @@ function costFilter(data) {
 }
 
 /**
+ * 
+ * @param {Object} data - Object of any information  
+ */
+function timeFilter(data) {
+  let slider = filterSliders.get("time");
+  if (data.issueddate !== undefined && data.expiresdate && slider !== undefined) {
+    let valArr = slider.get();
+    let min = moment(valArr[0]);
+    let max = moment(valArr[1]);
+    let startTime = moment(data.issueddate);
+    let endTime = moment(data.expiresdate);
+
+    if (startTime.isBetween(min, max, "year") || endTime.isBetween(min, max, "year")) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
  * This should be run when all data is initalized.
  * @param {*} data 
  */
@@ -122,7 +145,6 @@ function getActiveFilters() {
 
 function toggleFilterUI(type, min, max) {
   let filterContainer = document.getElementById("filter-container");
-  let filterEl;
 
   
   let options = {
@@ -140,13 +162,15 @@ function toggleFilterUI(type, min, max) {
   console.log("Toggle Filter ", type);
 
   if (activeFilters[type] === true) {
-    filterEl = document.getElementsByClassName(`filter__${type}`)[0];
+    let filterEl = document.getElementsByClassName(`filter__${type}`)[0];
     _removeFilter(type, filterEl);
     
     return false;
   } else {
-    filterContainer.innerHTML += getFilterHTML(type);
-    filterEl = document.getElementsByClassName(`filter__${type}__input`)[0];
+    let el = document.createElement("div");
+    el.innerHTML = getFilterHTML(type);
+    filterContainer.appendChild(el); //.innerHTML += getFilterHTML(type);
+    let filterEl = document.getElementsByClassName(`filter__${type}__input`)[0];
 
     switch(type) {
       case "cost": {
@@ -166,7 +190,7 @@ function toggleFilterUI(type, min, max) {
       case "time": {
         options.format = wNumb({
           decimals: 0,
-          thousand: ','
+          thousand: ''
         }),
     
         options.pips = {

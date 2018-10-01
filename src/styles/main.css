@@ -14,7 +14,7 @@ body {
     margin: 0;
 }
 
-#fly {
+#explore {
     display: block;
     position: absolute;
     z-index: 2;
@@ -25,10 +25,11 @@ body {
     padding: 10px;
     border: none;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 16px;
+    font-family: var(--default-font);
     text-align: center;
-    color: #fff;
-    background: #ee8a65;
+    color: #000000;
+    background: #f3901f;
 }
 
 
@@ -41,6 +42,13 @@ body {
     z-index: 10;
 }
 
+.color-blue {
+    background: blue;
+}
+
+.color-purple {
+    background: purple;
+}
 
 /* Buttons */
 .btn-container {
@@ -63,7 +71,6 @@ body {
     width: 55px;
     height: 55px;
     box-shadow: 0px 2px 8px 1px black;
-    background: blue;
 }
 
 .ripple:after {
@@ -176,7 +183,8 @@ body {
 
 .filter__input {
     display: inline-block;
-    width: 75%;
+    margin-right: 5%;
+    width: 65%;
 }
 
 #filter-container .slider {
