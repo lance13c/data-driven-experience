@@ -4,7 +4,7 @@
 
 ### Disclaimer
 
-There are two contributers listed. I have been using my girlfriend's old laptop (because mine broke) and I have been submitting under the wrong author.
+There are two contributers listed. I have been using my girlfriend's old laptop (because mine broke) and I have been submitting under the wrong author by accident.
 
 # Data Driven Experience
 
